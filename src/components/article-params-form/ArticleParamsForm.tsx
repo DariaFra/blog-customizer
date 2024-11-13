@@ -55,6 +55,7 @@ export const ArticleParamsForm = ({
 					onSubmit={(e) => {
 						e.preventDefault();
 						setCurrentArticleState(selectArticleState);
+						setIsOpen(false);
 					}}
 					onReset={() => {
 						setSelectArticleState(defaultArticleState);
