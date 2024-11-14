@@ -28,7 +28,7 @@ export const ArticleParamsForm = ({
 	currentArticleState,
 	setCurrentArticleState,
 }: ArticleParamsFormProps) => {
-	const [isOpen, setIsOpen] = useState<boolean>(false);
+	const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 	const rootRef = useRef<HTMLDivElement>(null);
 	const [selectArticleState, setSelectArticleState] =
 		useState<ArticleStateType>(currentArticleState);
@@ -38,24 +38,24 @@ export const ArticleParamsForm = ({
 	};
 
 	useOutsideClickClose({
-		isOpen,
+		isOpen: isMenuOpen,
 		rootRef,
-		onClose: () => setIsOpen(false),
-		onChange: setIsOpen,
+		onClose: () => setIsMenuOpen(false),
+		onChange: setIsMenuOpen,
 		event: 'mousedown',
 	});
 
 	return (
 		<div ref={rootRef}>
-			<ArrowButton isOpen={isOpen} onClick={setIsOpen} />
+			<ArrowButton isOpen={isMenuOpen} onClick={setIsMenuOpen} />
 			<aside
-				className={clsx(styles.container, isOpen && styles.container_open)}>
+				className={clsx(styles.container, isMenuOpen && styles.container_open)}>
 				<form
 					className={styles.form}
 					onSubmit={(e) => {
 						e.preventDefault();
 						setCurrentArticleState(selectArticleState);
-						setIsOpen(false);
+						setIsMenuOpen(false);
 					}}
 					onReset={() => {
 						setSelectArticleState(defaultArticleState);
